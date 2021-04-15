@@ -1,0 +1,137 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: RootQuery
+    mutation: RootMutation
+    subscription: Subscription
+}
+
+type AuthData {
+    token: String!
+    userId: String!
+}
+
+type OneTimeDonation {
+    donatedBy: User!
+    donatedTo: User!
+    email: String!
+    id: ID!
+    meta: String!
+    name: String!
+    price: Int!
+}
+
+type Post {
+    description: String!
+    imgUrl: String!
+    meta: String!
+    title: String!
+}
+
+type PostData {
+    posts: [Post!]!
+    totalPosts: Int!
+}
+
+type RootMutation {
+    createPost(postInput: PostInputData): Post!
+    deletePost(id: ID!): Boolean
+    registerUser(userInput: UserInputData): User!
+    updatePost(id: ID!, postInput: PostInputData): Post!
+}
+
+type RootQuery {
+    login(email: String!, password: String!): AuthData!
+    post(id: ID!): Post!
+    posts(page: Int): PostData!
+    user: User!
+}
+
+type StoreProduct {
+    description: String!
+    imgUrl: String!
+    meta: String!
+    price: Int!
+    title: String!
+}
+
+type Subscription {
+    description: String!
+    endDate: Int!
+    id: ID!
+    imgUrl: String!
+    isActive: Boolean!
+    meta: String!
+    name: String!
+    price: Int!
+    startDate: Int!
+}
+
+type Theme {
+    accentColorHex: String!
+    donationEmblem: String!
+    id: ID!
+    logoUrl: String!
+    meta: String!
+    postDonationText: String!
+    preDonationText: String!
+    primaryColorHex: String!
+}
+
+type Transaction {
+    date: Int!
+    discount: String!
+    id: ID!
+    linkedId: String!
+    meta: String!
+    payableAmount: Int!
+    razorpayId: String!
+    refundRequested: Boolean!
+    refundStatus: RefundStatus!
+    successful: Boolean!
+    totalAmount: Int!
+    transactionType: TransactionType!
+    userId: String!
+}
+
+type User {
+    email: String!
+    followers: [User!]!
+    following: [User!]!
+    id: ID!
+    isCreator: Boolean!
+    meta: String!
+    name: String!
+    password: String!
+    phone: String!
+    postsCreated: [Post!]
+    profileUrl: String!
+    store: [StoreProduct!]
+    subscriptionPlans: [Subscription!]
+    themeId: Theme
+    totalDonationsAmount: Int
+}
+
+enum RefundStatus {
+    NotInitiated
+    Processing
+    Refunded
+}
+
+enum TransactionType {
+    OneTimeDonation
+    Subscription
+}
+
+input PostInputData {
+    content: String!
+    imageUrl: String!
+    title: String!
+}
+
+input UserInputData {
+    email: String!
+    name: String!
+    password: String!
+    phone: Int!
+}
